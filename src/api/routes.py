@@ -50,7 +50,7 @@ def login_user():
     user_exist = User.query.filter_by(email=email, password=password).first()
     if user_exist:
         access_token = create_access_token(identity=email)
-        return jsonify(access_token=access_token), 200
+        return jsonify({"token": access_token}), 200
     else:
         return jsonify({"msg": "Incorrect user or password"}), 401
     

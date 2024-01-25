@@ -13,7 +13,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					background: "white",
 					initial: "white"
 				}
-			]
+			],
+			login: false,
+			token: ""
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -48,19 +50,36 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ demo: demo });
 			},
 			crearUsuario: async (data) => {
-				console.log(data)
+				const datos = data
 				try {
 					const resp = await fetch(`${process.env.BACKEND_URL}signup`, {
 						method: 'POST',
-						body: JSON.stringify(data),
+						body: JSON.stringify(datos),
 						headers: {
 							"Content-Type": "application/json"
 						}
 					})
 					const data = await resp.json()
-					console.log(data)
+					return data
 				} catch (error) {
-					
+					return 'Se ha producido un error', error
+				}
+			},
+			loginUser: async (data) => {
+				const datos = data
+				try {
+					const resp = await fetch(`${process.env.BACKEND_URL}login`, {
+						method: 'POST',
+						body: JSON.stringify(datos),
+						headers: {
+							"Content-Type": "application/json"
+						}
+					})
+					const data = await resp.json()
+					setStore({login: true, token: data.token})
+					return data
+				} catch (error) {
+					return 'Se ha producido un error', error
 				}
 			}
 		}

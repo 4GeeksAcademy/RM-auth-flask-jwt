@@ -1,26 +1,26 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 
-const Signup = () => {
-    const {actions} = useContext(Context)
+const Login = () => {
+    const { store, actions} = useContext(Context)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const data = {email: email, password: password, is_active: true}
+    const data = {email: email, password: password}
+    const handleSubmit = e => e.preventDefault()
     const handleClick = (data) => {
         if (email === '' || password === '') {
             return alert('Ambos campos son obligatorios')
         }
-        actions.crearUsuario(data)
-        window.location.href = "/login"
+        actions.loginUser(data)
+        window.location.href = '/private'
     }
-    const handleSubmit = (e) => e.preventDefault()
     return (
         <>
-            <form onSubmit={e => handleSubmit(e)} className="w-50 mx-auto">
-                <h1 className="text-center">Introduce tus datos pata registrarte:</h1>
+            <h1 className="text-center">Ingresa a tu cuenta</h1>
+            <form onSubmit={e => handleSubmit(e)} className="w-50 mx-auto border rounded-3 p-5">
                 <div className="mb-3">
-                    <label htmlFor="email" className="form-label">Email:</label>
-                    <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" className="form-control" id="email" aria-describedby="emailHelp" placeholder="Tu email"/>
+                    <label htmlFor="email" className="form-label">Introduce el email con el que te registraste</label>
+                    <input onChange={e => setEmail(e.target.value)} type="email" className="form-control" id="email" aria-describedby="emailHelp" />
                     <div id="emailHelp" className="form-text">Nunca utilizaremos tu email para otro proposito</div>
                 </div>
                 <div className="mb-3">
@@ -33,4 +33,4 @@ const Signup = () => {
     )
 }
 
-export default Signup
+export default Login

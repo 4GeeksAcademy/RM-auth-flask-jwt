@@ -11,13 +11,16 @@ import injectContext from "./store/appContext";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import Signup from "./pages/signup";
+import Login from "./pages/login";
+import Private from "./pages/private";
+import RequireAuth from "./component/requireAuth";
 
 //create your first component
 const Layout = () => {
-    const data = {
-        user: "Raul",
-        password: "12345"
-    }
+    // const data = {
+    //     user: "Raul",
+    //     password: "12345"
+    // }
     // useEffect(() => {
     //     fetch("https://fictional-couscous-jx5pxppp9jpcqqr9-3001.app.github.dev/api/login", {
     //         method: 'POST',
@@ -48,6 +51,8 @@ const Layout = () => {
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<Signup />} path="/signup" />
+                        <Route element={<Login />} path="/login" />
+                        <Route element={<RequireAuth ><Private /></RequireAuth>} path="/private" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
