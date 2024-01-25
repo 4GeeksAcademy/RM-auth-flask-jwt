@@ -76,7 +76,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}
 					})
 					const data = await resp.json()
-					setStore({login: true, token: data.token})
+					console.log(data)
+					localStorage.setItem("token", data.token)
 					return data
 				} catch (error) {
 					return 'Se ha producido un error', error

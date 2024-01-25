@@ -3,8 +3,7 @@ import { Navigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 const RequireAuth = ({children}) => {
-    const {store} = useContext(Context)
-    const isLogged = store.login
+    const isLogged = localStorage.getItem("token")
     console.log(isLogged)
     if (!isLogged) {
     return <Navigate to="/login" />
