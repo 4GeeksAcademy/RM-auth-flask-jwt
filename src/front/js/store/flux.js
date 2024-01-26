@@ -73,9 +73,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 							"Content-Type": "application/json"
 						}
 					})
-					const data = await resp.json()
-					localStorage.setItem("token", data.token)
-					return data
+					if(resp.status === 200) {
+						const data = await resp.json()
+						console.log(data)
+						localStorage.setItem("token", data.token)
+						return data
+					}
 				} catch (error) {
 					return 'Se ha producido un error', error
 				}
