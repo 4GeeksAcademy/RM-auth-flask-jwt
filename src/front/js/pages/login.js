@@ -11,8 +11,9 @@ const Login = () => {
         if (email === '' || password === '') {
             return alert('Ambos campos son obligatorios')
         }
-        actions.loginUser(data)
-        window.location.href = '/private'
+        const datos = actions.loginUser(data)
+        console.log(datos.token)
+        // window.location.href = '/private'
     }
     return (
         <>
