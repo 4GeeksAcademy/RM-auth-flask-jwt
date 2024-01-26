@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
-import { Context } from "../store/appContext";
+import React, { useEffect, useState } from "react";
 
 const Private = () => {
-    const isLogged = sessionStorage.getItem("token")
+    const [isLogged, setIsLogged] = useState(null)
+    useEffect(() => {
+    setIsLogged(sessionStorage.getItem("token"))
+    }, [])
     console.log(isLogged)
-    const {store} = useContext(Context)
-    console.log(store.token)
     return (
         <h1>Esta página es privada</h1>
     )

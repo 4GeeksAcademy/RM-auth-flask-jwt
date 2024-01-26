@@ -1,20 +1,23 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export const Navbar = () => {
-	const {store, actions} = useContext(Context)
+	const [token, setToken] = useState(null)
+	useEffect(() => {
+		setToken(sessionStorage.getItem('token'))
+	}, [])
 	const renderLink = () => {
-		if(store.login === true) {
+		if(token) {
 			return (
 				<Link to="/">
-					<button className="btn btn-danger">Sign Out</button>
+					<button className="btn btn-danger" onClick={() => setToken(sessionStorage.removeItem('token'))}>Sign Out</button>
 				</Link>
 			)
 		}else {
 			return (
 				<Link to="/login">
-					<button className="btn btn-success">Sign In</button>
+					<button className="btn btn-success" >Sign In</button>
 				</Link>
 			)
 		}

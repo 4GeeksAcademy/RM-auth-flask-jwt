@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 
 const Login = () => {
@@ -6,15 +6,24 @@ const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const data = {email: email, password: password}
-    const handleSubmit = e => e.preventDefault()
+    const login = () => {
+        const token = sessionStorage.getItem('token')
+        console.log(token)
+        if(token) {
+            window.location.href='/private'
+        }else {
+            alert("Revisa tu correo y contraseña")
+        }
+    }
     const handleClick = (data) => {
         if (email === '' || password === '') {
             return alert('Ambos campos son obligatorios')
         }
-        const datos = actions.loginUser(data)
-        console.log(datos.token)
-        // window.location.href = '/private'
+        actions.loginUser(data)
+        login()
+        // window.location.href="/private"
     }
+    const handleSubmit = e => e.preventDefault()
     return (
         <>
             <h1 className="text-center">Ingresa a tu cuenta</h1>
