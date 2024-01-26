@@ -13,9 +13,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					background: "white",
 					initial: "white"
 				}
-			],
-			login: false,
-			token: ""
+			]
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -76,8 +74,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}
 					})
 					const data = await resp.json()
-					console.log(data)
-					sessionStorage.setItem("token", data.token)
+					localStorage.setItem("token", data.token)
 					return data
 				} catch (error) {
 					return 'Se ha producido un error', error

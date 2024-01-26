@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 const Private = () => {
     const [isLogged, setIsLogged] = useState(null)
     useEffect(() => {
-    setIsLogged(sessionStorage.getItem("token"))
+    setIsLogged(localStorage.getItem("token"))
     }, [])
     console.log(isLogged)
     return (

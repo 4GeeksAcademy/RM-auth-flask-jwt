@@ -5,13 +5,13 @@ import { Context } from "../store/appContext";
 export const Navbar = () => {
 	const [token, setToken] = useState(null)
 	useEffect(() => {
-		setToken(sessionStorage.getItem('token'))
+		setToken(localStorage.getItem('token'))
 	}, [])
 	const renderLink = () => {
 		if(token) {
 			return (
 				<Link to="/">
-					<button className="btn btn-danger" onClick={() => setToken(sessionStorage.removeItem('token'))}>Sign Out</button>
+					<button className="btn btn-danger" onClick={() => setToken(localStorage.removeItem('token'))}>Sign Out</button>
 				</Link>
 			)
 		}else {

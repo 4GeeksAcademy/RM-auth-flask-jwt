@@ -1,15 +1,14 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 
 const Login = () => {
-    const { store, actions} = useContext(Context)
+    const {actions} = useContext(Context)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const data = {email: email, password: password}
     const login = () => {
-        const token = sessionStorage.getItem('token')
-        console.log(token)
-        if(token) {
+        const token = localStorage.getItem('token')
+        if(token != null && token != 'undefined') {
             window.location.href='/private'
         }else {
             alert("Revisa tu correo y contraseña")
@@ -19,6 +18,7 @@ const Login = () => {
         if (email === '' || password === '') {
             return alert('Ambos campos son obligatorios')
         }
+        console.log(data)
         actions.loginUser(data)
         login()
         // window.location.href="/private"
